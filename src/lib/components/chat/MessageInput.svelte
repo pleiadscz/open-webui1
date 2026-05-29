@@ -166,13 +166,13 @@
 					if (e.target.files) Array.from(e.target.files).forEach(uploadFile);
 				}} />
 				
-				<form class="flex flex-col relative w-full rounded-3xl px-1.5 border border-gray-100 dark:border-gray-850 bg-white dark:bg-[#303030]" 
+				<form class="flex items-center gap-2 w-full rounded-full px-3 py-2 border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-[0_0_40px_rgba(0,0,0,0.04)] dark:shadow-none" 
 					on:submit|preventDefault={handleSubmit}>
 					
-					<div class="flex">
+					<div class="contents">
 						{#if fileUploadEnabled}
-							<div class="self-end mb-2 ml-1">
-								<button class="bg-gray-50 hover:bg-gray-100 text-gray-800 dark:bg-gray-850 dark:text-white dark:hover:bg-gray-800 transition rounded-full p-1.5" 
+							<div class="shrink-0">
+								<button class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors" 
 									type="button" on:click={() => window.innerWidth >= 768 ? filesInputElement.click() : (drawerOpen = true)}>
 									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-[1.2rem] h-[1.2rem]">
 										<path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
@@ -181,19 +181,19 @@
 							</div>
 						{/if}
 
-						<textarea id="chat-textarea" bind:this={chatTextAreaElement} 
-							class="dark:bg-[#303030] dark:text-gray-100 outline-none w-full py-3 px-3 rounded-xl resize-none h-[48px]" 
+<textarea id="chat-textarea" bind:this={chatTextAreaElement} 
+						class="flex-1 bg-transparent px-1 py-2 text-[15px] text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-500 dark:placeholder:text-neutral-400 focus:outline-none disabled:opacity-60 resize-none h-[36px]"
 							{placeholder} bind:value={prompt} rows="1" on:keydown={handleKeyDown} />
 
-						<div class="self-end mb-2 flex space-x-1 mr-1">
+						<div class="shrink-0 flex space-x-1">
 							{#if !responsePending}
-								<button class="bg-black text-white hover:bg-gray-900 dark:bg-white dark:text-black rounded-full p-1.5" type="submit">
+								<button class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-black dark:bg-white text-white dark:text-black hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors" type="submit">
 									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-5 h-5">
 										<path fill-rule="evenodd" d="M8 14a.75.75 0 0 1-.75-.75V4.56L4.03 7.78a.75.75 0 0 1-1.06-1.06l4.5-4.5a.75.75 0 0 1 1.06 0l4.5 4.5a.75.75 0 0 1-1.06 1.06L8.75 4.56v8.69A.75.75 0 0 1 8 14Z" clip-rule="evenodd" />
 									</svg>
 								</button>
 							{:else}
-								<button class="bg-black text-white hover:bg-gray-900 disabled:opacity-60 dark:bg-white dark:text-black rounded-full p-1.5" type="button" on:click={handleStopResponse} disabled={isStopping} aria-label="Zatrzymaj generowanie">
+								<button class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-black dark:bg-white text-white dark:text-black hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors disabled:opacity-60" type="button" on:click={handleStopResponse} disabled={isStopping} aria-label="Zatrzymaj generowanie">
 									<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M6 8C6 6.89543 6.89543 6 8 6H16C17.1046 6 18 6.89543 18 8V16C18 17.1046 17.1046 18 16 18H8C6.89543 18 6 17.1046 6 16V8Z" /></svg>
 								</button>
 							{/if}
