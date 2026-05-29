@@ -182,7 +182,7 @@
 						{/if}
 
 <textarea id="chat-textarea" bind:this={chatTextAreaElement} 
-						class="flex-1 bg-transparent px-1 py-2 text-[15px] text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-500 dark:placeholder:text-neutral-400 focus:outline-none disabled:opacity-60 resize-none h-[36px]"
+						class="bg-transparent px-1 py-2 text-[15px] text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-500 dark:placeholder:text-neutral-400 focus:outline-none disabled:opacity-60 resize-none h-[36px]"
 							{placeholder} bind:value={prompt} rows="1" on:keydown={handleKeyDown} />
 
 						<div class="shrink-0 flex space-x-1">
