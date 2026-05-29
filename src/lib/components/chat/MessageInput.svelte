@@ -29,11 +29,6 @@
 		(Array.isArray(taskIds) && taskIds.length > 0) ||
 		(lastMessage?.role === 'assistant' && lastMessage?.done !== true);
 
-	$: if (prompt && chatTextAreaElement && chatTextAreaElement.style) {
-		chatTextAreaElement.style.height = '';
-		chatTextAreaElement.style.height = Math.min(chatTextAreaElement.scrollHeight, 200) + 'px';
-	}
-
 	const uploadFile = (file) => {
 		files = [...files, { type: 'doc', name: file.name, upload_status: true }];
 	};
@@ -171,7 +166,7 @@
 					
 					<div class="contents">
 						{#if fileUploadEnabled}
-							<div class="shrink-0">
+							<div class="shrink-0 flex items-center">
 								<button class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors" 
 									type="button" on:click={() => window.innerWidth >= 768 ? filesInputElement.click() : (drawerOpen = true)}>
 									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-[1.2rem] h-[1.2rem]">
@@ -181,11 +176,13 @@
 							</div>
 						{/if}
 
-<textarea id="chat-textarea" bind:this={chatTextAreaElement} 
-						class="bg-transparent px-1 py-2 text-[15px] text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-500 dark:placeholder:text-neutral-400 focus:outline-none disabled:opacity-60 resize-none h-[36px]"
-							{placeholder} bind:value={prompt} rows="1" on:keydown={handleKeyDown} />
+						<div class="flex-1 flex items-center">
+							<textarea id="chat-textarea" bind:this={chatTextAreaElement} 
+								class="w-full bg-transparent px-1 py-2 text-[15px] text-neutral-900 dark:text-neutral-100 placeholder:text-neutral-500 dark:placeholder:text-neutral-400 focus:outline-none disabled:opacity-60 resize-none h-[40px] flex items-center"
+								{placeholder} bind:value={prompt} rows="1" on:keydown={handleKeyDown} />
+						</div>
 
-						<div class="shrink-0 flex space-x-1">
+						<div class="shrink-0 flex items-center space-x-1">
 							{#if !responsePending}
 								<button class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-black dark:bg-white text-white dark:text-black hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors" type="submit">
 									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-5 h-5">
@@ -230,5 +227,10 @@
 			z-index: 60;
 			transition: bottom 120ms ease-out;
 		}
+	}
+
+	#chat-textarea {
+		line-height: 24px;
+		overflow-y: auto;
 	}
 </style>
